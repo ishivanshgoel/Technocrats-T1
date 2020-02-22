@@ -1,40 +1,67 @@
 <!DOCTYPE html>
-<html>
-<!-- <meta http-equiv="refresh" content="1"> -->
+<html lang="en">
 <head>
-  <title>Technocrats</title>
-  
+    <meta charset="UTF-8">
+    <title>Title</title>
+     <style>
+
+    h2   {
+        color: aliceblue;
+    }
+    h1{
+        color: darkslategrey;
+        text-align: center;
+        font-size: 70px;
+    }
+    body {
+        background-color: black;
+    }
+
+    #banner{
+        background-color: yellow;
+        height: 100px;
+        border-radius: 2%;
+        float: center;
+    }
+
+    </style>
+    <div id='banner'>
+    <img style ="text-align: -webkit-left;float: left;height: 100px;width:100px;" src="/banner">
+    <h1>TASK 1</h1>
+</div>
 </head>
 <body>
-  <h1>Technocrats Robotics</h1>
-  <img src="{{ url_for('video_feed') }}">
-  <br>
-  <p id="ball">Green Ball</p>
-  <!-- <div class="messcards">
-    <h1>here</h1>
-  </div> -->
-  <button id="eventBtn" onclick="myFunc()">Test</button>
+
+<center>
+    <br><br><br>
+<img src="{{ url_for('video_feed')}}">
+<h2>***Hello from Flask***</h2>
+    <h2 id="ball">Green Ball</h2>
+    
+    <!-- <button id="eventBtn" onclick="myFunc()">Test</button> -->
+    <button>Get data</button>
+  </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <!-- <script type="text/javascript"> -->
+        <!-- function myFunc(){ -->
+          <!-- setInterval(function(){ -->
+          <!-- // var source = JSON.stringify("{{ url_for('params') }}"); -->
+          <!-- var s=JSON.parse("{{ url_for('params') }}") -->
+          <!-- var btn = document.getElementById("ball"); -->
+          <!-- // btn.innerHTML = 'status =' + source.data ; -->
+          <!-- $("#ball").text(source.data); -->
+          <!-- }, 1000); -->
+        <!-- } -->
+<script>
+        $("button").click(function(){
+  $.getJSON("{{ url_for('params') }}", function(result){
+    $.each(result, function(i, field){
+      // $("#ball").append(field + " ");
+      $("#ball").text("Green Ball Found");
+    });
+  });
+});
+      </script>
+</center>
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script type="text/javascript">
-      // source.onmessage = function (event) {
-
-      //   console.log("Hello world");
-      //   data = event.data;
-      //   $("p").text(data);
-      //   var element = document.getElementById("ball");
-      //   element.innerHTML = "Green Ball Found";
-      // };
-      var x =0;
-      function myFunc(){
-        setInterval(function(){
-        // var source = new EventSource("{{ url_for('params') }}");
-        var source = new EventSource('/params');
-        var btn = document.getElementById("ball");
-        x = source;
-        btn.innerHTML = 'status =' + source.data ;
-        }, 1000);
-
-      }
-    </script>
 </html>
