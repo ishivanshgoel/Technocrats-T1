@@ -56,8 +56,9 @@
         $("button").click(function(){
   $.getJSON("{{ url_for('params') }}", function(result){
     $.each(result, function(i, field){
-      // $("#ball").append(field + " ");
-      $("#ball").text("Green Ball Found");
+      //$("#ball").append(field + " ");
+      console.log(typeof(field));
+     $("#ball").text(field);
     });
   });
 });
