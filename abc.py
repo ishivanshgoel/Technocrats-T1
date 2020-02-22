@@ -1,8 +1,7 @@
 from flask import Flask, render_template, Response,jsonify
 from camera import VideoCamera
-
 app = Flask(__name__)
-
+arr=[]
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -13,9 +12,11 @@ def gen(camera):
         yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
 def live(camera):
+    global arr
     while True:
         frame,a=camera.get_frame()
-        yield(a)
+        # yield(a)
+        arr.append(a)
 
 @app.route('/video_feed')
 def video_feed():
@@ -23,6 +24,8 @@ def video_feed():
 
 @app.route('/params')
 def params():
-    return Response(live(VideoCamera()),mimetype='text/event-stream')
-
+    ##return Response(live(VideoCamera),mimetype='text/event-stream')
+    # return jsonify(live(VideoCamera()
+    return jsonify(arr)
 app.run(debug=True)
+
