@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<!-- <meta http-equiv="refresh" content="1"> -->
+<head>
+  <title>Technocrats</title>
+  
+</head>
+<body>
+  <h1>Technocrats Robotics</h1>
+  <img src="{{ url_for('video_feed') }}">
+  <br>
+  <p id="ball">Green Ball</p>
+  <!-- <div class="messcards">
+    <h1>here</h1>
+  </div> -->
+  <button id="eventBtn" onclick="myFunc()">Test</button>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      // source.onmessage = function (event) {
+
+      //   console.log("Hello world");
+      //   data = event.data;
+      //   $("p").text(data);
+      //   var element = document.getElementById("ball");
+      //   element.innerHTML = "Green Ball Found";
+      // };
+      var x =0;
+      function myFunc(){
+        setInterval(function(){
+        // var source = new EventSource("{{ url_for('params') }}");
+        var source = new EventSource('/params');
+        var btn = document.getElementById("ball");
+        x = source;
+        btn.innerHTML = 'status =' + source.data ;
+        }, 1000);
+
+      }
+    </script>
+</html>
